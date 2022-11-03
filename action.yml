@@ -1,0 +1,28 @@
+name: 'License Finder Scan'
+description: 'Runs license_finder on the repository'
+inputs:
+  permitted-licenses:  # id of input
+    description: 'A comma separated list of licenses that are permitted'
+    required: false
+  report-name:  # id of input
+    description: 'The name of the report to be generated'
+    required: true
+    default: license_finder_report.xml
+runs:
+  using: "composite"
+  steps:
+    - name: 'Install license-finder'
+      run: |
+        echo "Installing license_finder"
+        sudo gem install license_finder
+      shell: bash
+    - run: |
+        echo "Configuring permitted licenses"
+        licenses="${{ inputs.permitted-licenses }}"
+        for i in ${licenses//,/ }
+        do
+            license_finder permitted_licenses add $i
+        done
+      shell: bash
+    - run: license_finder report --use-spdx-id --format=junit --quiet > ${{ report-name }}
+      shell: bash
