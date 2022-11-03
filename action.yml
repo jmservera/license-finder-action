@@ -1,5 +1,8 @@
 name: 'License Finder Scan'
 description: 'Runs license_finder on the repository'
+branding:
+  icon: 'file-text'
+  color: ''
 inputs:
   permitted-licenses:  # id of input
     description: 'A comma separated list of licenses that are permitted'
@@ -24,5 +27,5 @@ runs:
             license_finder permitted_licenses add $i
         done
       shell: bash
-    - run: license_finder report --use-spdx-id --format=junit --quiet > ${{ report-name }}
+    - run: license_finder report --use-spdx-id --format=junit --quiet > ${{ inputs.report-name }}
       shell: bash
