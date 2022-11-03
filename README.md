@@ -20,7 +20,7 @@ Default: license_finder_report.xml
 ## Usage
 
 ```yaml
-uses: jmservera/license-finder-action@v0.1-alpha
+uses: jmservera/license-finder-action@v0.1.3-alpha
 with:
   permitted-licenses: MIT,Apache-2.0
 ```
@@ -31,7 +31,7 @@ and the [Publish unit test result action](https://github.com/EnricoMi/publish-un
 
 ```yaml
 - name: 'License Scan'
-  uses: jmservera/license-finder-action@v0.1-alpha
+  uses: jmservera/license-finder-action@v0.1.3-alpha
   with:
     permitted-licenses: MIT,Apache-2.0
 - name: Publish Test Results
