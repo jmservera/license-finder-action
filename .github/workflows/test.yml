@@ -20,7 +20,7 @@ jobs:
     - name: test local license
       uses: ./
       with:
-        permitted-licenses: MIT
+        permitted-licenses: MIT,Apache-2.0,BSD
         base-path: ${{ github.workspace }}/test/java
     - name: second test
       run: cd test/java && license_finder
