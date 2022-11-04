@@ -26,7 +26,8 @@ jobs:
                                javax.annotation-api,junit-jupiter,junit-jupiter-api,junit-jupiter-engine,junit-jupiter-params,junit-platform-commons,
                                junit-platform-engine,logback-classic,logback-core
         base-path: ${{ github.workspace }}/test/java
-    - name: Output test
+    - name: Output failed tests
+      if: failure()
       run: cd test/java && license_finder
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2.0.0
