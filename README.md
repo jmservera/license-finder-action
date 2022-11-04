@@ -35,7 +35,7 @@ Default: ${{ github.workspace }}
 ## Usage
 
 ```yaml
-uses: jmservera/license-finder-action@v0.1.3-alpha
+uses: jmservera/license-finder-action@v0.1.4-alpha
 with:
   permitted-licenses: MIT,Apache-2.0
   approved-dependencies: jquery,bootstrap
