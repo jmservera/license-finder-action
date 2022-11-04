@@ -4,10 +4,13 @@ branding:
   icon: 'file-text'
   color: 'white'
 inputs:
-  permitted-licenses:  # id of input
+  permitted-licenses:
     description: 'A comma separated list of licenses that are permitted'
     required: false
-  report-name:  # id of input
+  approved-dependencies:
+    description: 'A comma separated list of dependencies that are approved'
+    required: false
+  report-name:
     description: 'The name of the report to be generated'
     required: true
     default: license_finder_report.xml
@@ -30,8 +33,19 @@ runs:
         for i in ${licenses//,/ }
         do
             license_finder permitted_licenses add $i
-        done
+        done        
       shell: bash
+      if: ${{ inputs.permitted-licenses }}
+    - run: |
+        cd ${{ inputs.base-path }}
+        echo "Configuring approved dependencies"
+        dependencies="${{ inputs.approved-dependencies }}"
+        for i in ${dependencies//,/ }
+        do
+            license_finder approvals add $i
+        done        
+      shell: bash
+      if: ${{ inputs.approved-dependencies }}
     - run: |
         cd ${{ inputs.base-path }}
         license_finder report --use-spdx-id --format=junit --quiet > ${{ inputs.report-name }}

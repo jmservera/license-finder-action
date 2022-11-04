@@ -17,12 +17,13 @@ jobs:
         distribution: 'temurin' # See 'Supported distributions' for available options
         java-version: '11'
         cache: maven
-    - name: test local license
+    - name: Test local license and approvals
       uses: ./
       with:
         permitted-licenses: MIT,Apache-2.0,BSD
+        approved-dependencies: hamcrest-core,hamcrest-library,javax.annotation-api,junit,logback-classic,logback-core
         base-path: ${{ github.workspace }}/test/java
-    - name: second test
+    - name: Output test
       run: cd test/java && license_finder
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2.0.0
