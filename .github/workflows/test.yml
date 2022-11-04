@@ -15,14 +15,15 @@ jobs:
     - uses: actions/setup-java@v3
       with:
         distribution: 'temurin' # See 'Supported distributions' for available options
-        java-version: '17'
+        java-version: '11'
+        cache: maven
     - name: test local license
       uses: ./
       with:
         permitted-licenses: MIT
         base-path: ${{ github.workspace }}/test/java
     - name: second test
-      run: license_finder
+      run: cd test/java && license_finder
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2.0.0
       if: always()
