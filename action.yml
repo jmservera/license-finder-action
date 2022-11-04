@@ -24,6 +24,7 @@ runs:
         sudo gem install license_finder
       shell: bash
     - run: |
+        cd ${{ inputs.base-path }}
         echo "Configuring permitted licenses"
         licenses="${{ inputs.permitted-licenses }}"
         for i in ${licenses//,/ }
