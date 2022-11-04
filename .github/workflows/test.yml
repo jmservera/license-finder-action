@@ -21,7 +21,10 @@ jobs:
       uses: ./
       with:
         permitted-licenses: MIT,Apache-2.0,BSD
-        approved-dependencies: hamcrest-core,hamcrest-library,javax.annotation-api,junit,logback-classic,logback-core
+        approved-dependencies: |
+                               asm,hamcrest,hamcrest-core,hamcrest-library,jakarta.activation-api,jakarta.annotation-api,jakarta.xml.bind-api,
+                               javax.annotation-api,junit-jupiter,junit-jupiter-api,junit-jupiter-engine,junit-jupiter-params,junit-platform-commons,
+                               junit-platform-engine,logback-classic,logback-core
         base-path: ${{ github.workspace }}/test/java
     - name: Output test
       run: cd test/java && license_finder
