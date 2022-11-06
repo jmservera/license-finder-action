@@ -20,6 +20,7 @@ jobs:
       uses: ./
       with:
         permitted-licenses: MIT
+        base-path: ${{ github.workspace }}/test/java
     - name: Publish Test Results
       uses: EnricoMi/publish-unit-test-result-action@v2.0.0
       if: always()
