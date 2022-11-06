@@ -12,6 +12,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - uses: ./
+    - name: test local license
+      uses: ./
       with:
         permitted-licenses: MIT
+    - name: Publish Test Results
+      uses: EnricoMi/publish-unit-test-result-action@v2.0.0
+      if: always()
+      with:
+        junit_files: "license_finder_report.xml"
+    - name: 'Upload Dependency Review Report'
+      if: always()
+      uses: actions/upload-artifact@v2
+      with:
+        name: license-finder-report
+        path: license_finder_report.xml
