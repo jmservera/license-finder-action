@@ -11,6 +11,10 @@ inputs:
     description: 'The name of the report to be generated'
     required: true
     default: license_finder_report.xml
+  base-path:
+    description: 'The base path with the code to review'
+    required: true
+    default: ${{ github.workspace }} 
 runs:
   using: "composite"
   steps:
@@ -27,5 +31,7 @@ runs:
             license_finder permitted_licenses add $i
         done
       shell: bash
-    - run: license_finder report --use-spdx-id --format=junit --quiet > ${{ inputs.report-name }}
+    - run: |
+        cd ${{ inputs.base-path }}
+        license_finder report --use-spdx-id --format=junit --quiet > ${{ inputs.report-name }}
       shell: bash
