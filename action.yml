@@ -48,5 +48,9 @@ runs:
       if: ${{ inputs.approved-dependencies }}
     - run: |
         cd ${{ inputs.base-path }}
+        license_finder report --use-spdx-id
+      shell: bash
+    - run: |
+        cd ${{ inputs.base-path }}
         license_finder report --use-spdx-id --format=junit --quiet > ${{ inputs.report-name }}
       shell: bash
